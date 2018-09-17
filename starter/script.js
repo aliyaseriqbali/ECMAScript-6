@@ -107,25 +107,148 @@
 /////////////////////////////////
 // Arrow functions
 
-const years = [1990, 1965, 1982, 1937];
+// const years = [1990, 1965, 1982, 1937];
+
+// // ES5
+// var ages5 = years.map(function (el) {
+//     return 2016 - el;
+// });
+// console.log(ages5);
+
+// // ES6
+// let ages6 = years.map(el => 2016 - el);
+// console.log(ages6);
+// // Two argument
+// ages6 = years.map((el, index) => `Age element ${index + 1}: ${2016 - el}.`);
+// console.log(ages6);
+
+// // More lines of code 
+// ages6 = years.map((el, index) => {
+//     const now = new Date().getFullYear();
+//     const age = now - el;
+//     return `Age element ${index + 1}: ${age}.`;
+// });
+// console.log(ages6);
+
+
+/////////////////////////////////
+// Arrow functions part 2
 
 // ES5
-var ages5 = years.map(function (el) {
-    return 2016 - el;
-});
-console.log(ages5);
+var box5 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
+
+        var self = this;
+        document.querySelector('.green').addEventListener('click', function () {
+            var str = 'This is box number ' + self.position + ' and its is ' + self.color;
+            alert(str);
+        })
+    }
+}
+// box5.clickMe();
+
 
 // ES6
-let ages6 = years.map(el => 2016 - el);
-console.log(ages6);
-// Two argument
-ages6 = years.map((el, index) => `Age element ${index + 1}: ${2016 - el}.`);
-console.log(ages6);
+const box6 = {
+    color: 'green',
+    position: 1,
+    clickMe: function () {
 
-// More lines of code 
-ages6 = years.map((el, index) => {
-    const now = new Date().getFullYear();
-    const age = now - el;
-    return `Age element ${index + 1}: ${age}.`;
-});
-console.log(ages6);
+        document.querySelector('.green').addEventListener('click', () => {
+            var str = 'This is box number ' + this.position + ' and its is ' + this.color;
+            alert(str);
+        })
+    }
+}
+// box6.clickMe();
+/*
+const box66 = {
+    color: 'green',
+    position: 1,
+    clickMe: () => {
+
+        document.querySelector('.green').addEventListener('click', () => {
+            var str = 'This is box number ' + this.position + ' and its is ' + this.color;
+            alert(str);
+        })
+    }
+}
+box66.clickMe();
+*/
+
+// ES5
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.myFriends5 = function (friends) {
+
+    var arr = friends.map(function (el) {
+        return this.name + ' is friends with ' + el;
+
+    }.bind(this));
+    console.log(arr);
+}
+var friends = ['Bob', 'Jane', 'Mark'];
+new Person('John').myFriends5(friends);
+
+// ES6
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.myFriends6 = function (friends) {
+
+    var arr = friends.map(el => `${this.name} is friends with ${el}`);
+    console.log(arr);
+}
+
+new Person('Mike').myFriends6(friends);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
